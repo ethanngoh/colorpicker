@@ -110,13 +110,15 @@ export const Input = ({
           return;
         }
 
-        setValue([
+        const val = [
           ...value,
           {
             label: `#${valWithHex}`,
             value: `#${valWithHex}`
           }
-        ]);
+        ];
+        setValue(val);
+        setInput(val);
         setInputValue("");
         console.log(`Added #${valWithHex}`);
     }
@@ -131,7 +133,10 @@ export const Input = ({
         menuIsOpen={false}
         onKeyDown={handleKeyDown}
         onInputChange={(inputValue: string) => setInputValue(inputValue)}
-        onChange={(value: OnChangeValue<SelectOption, true>, actionMeta: ActionMeta<SelectOption>) => setValue(value)}
+        onChange={(value: OnChangeValue<SelectOption, true>, actionMeta: ActionMeta<SelectOption>) => {
+          setValue(value);
+          setInput(value);
+        }}
         styles={customStyle}
         placeholder={placeholder}
         value={value}

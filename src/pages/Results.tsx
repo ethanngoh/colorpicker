@@ -4,10 +4,12 @@ const NodeBox = styled.div``;
 
 const Result = ({ color }: { color: string }) => <NodeBox>{color}</NodeBox>;
 
-export const Results = ({ colors }: { colors: string[] }) => (
-  <div>
-    {colors.map((c) => (
-      <Result color={c} />
-    ))}
-  </div>
-);
+export const Results = ({ colors }: { colors: string[] }) => {
+  return (
+    <div>
+      {colors.map((c) => (
+        <Result color={c} />
+      ))}
+    </div>
+  );
+};
