@@ -3,12 +3,13 @@ import { useCallback, useEffect, useState } from "react";
 import { MultiValue } from "react-select";
 
 import { GRAY_RANGE } from "../colors";
-import { Input, SelectOption } from "../components/input";
+import { MultiColorInput, SelectOption } from "../components/multiColorInput";
 import { Navigation } from "../components/navbar";
 import { useBackgroundColor } from "../hooks/useBackgroundColor";
 import { useTextColor } from "../hooks/useTextColor";
-import { H1 } from "../stylePrimitives";
-import { Results } from "./Results";
+import { FlexCol, H1 } from "../stylePrimitives";
+import { ColorResultsDisplay } from "./colorResultsDisplay";
+import { ColorResultsExport } from "./colorResultsExport";
 
 const Content = styled.div`
   display: flex;
@@ -18,37 +19,39 @@ const Content = styled.div`
   padding-top: 80px;
 `;
 
-const Frame = styled.div`
-  border: 1px solid rgba(0, 0, 0, 0.2);
-
-  display: flex;
-  flex-direction: column;
+const Frame = styled(FlexCol)`
+  // border: 1px solid white;
   align-items: center;
   padding: 1rem;
-`;
-
-const Button = styled.button`
-  margin: 1rem;
-
-  &:hover {
-    border: 1px solid black;
-  }
 `;
 
 export const Index = () => {
   useBackgroundColor(GRAY_RANGE[900]);
   useTextColor(GRAY_RANGE[0]);
 
-  const [colors, setColors] = useState<MultiValue<SelectOption>>([]);
+  const [colors, setColors] = useState<MultiValue<SelectOption>>([
+    { label: "#abcdef", value: "#abcdef" },
+    { label: "#123456", value: "#123456" },
+    { label: "#987654", value: "#987654" }
+  ]);
 
   return (
     <>
       <Navigation />
       <Content>
         <Frame>
-          <H1 style={{ textAlign: "center" }}>Color Picker</H1>
-          <Input placeholder={"Type Hex Colors"} setInput={setColors} />
-          {colors && <Results colors={colors.map((c) => c.value)} />}
+          <H1>Color Wheel</H1>
+          <MultiColorInput placeholder={"Type Hex Colors"} setInput={setColors} />
+        </Frame>
+
+        <Frame>
+          <H1>Shade Generator</H1>
+          <MultiColorInput placeholder={"Type Hex Colors"} setInput={setColors} />
+        </Frame>
+        <Frame>{colors && <ColorResultsDisplay colors={colors.map((c) => c.value)} />}</Frame>
+        <Frame>
+          <H1>Export</H1>
+          {colors && <ColorResultsExport colors={colors.map((c) => c.value)} />}
         </Frame>
       </Content>
     </>

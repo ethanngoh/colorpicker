@@ -2,12 +2,12 @@ import styled from "@emotion/styled";
 import { KeyboardEventHandler, useState } from "react";
 import Select, { ActionMeta, OnChangeValue } from "react-select";
 import CreatableSelect from "react-select/creatable";
-import { getContrastTextColor, hexToHsl } from "../colorConvert";
 
+import { getContrastTextColor, hexToHsl } from "../colorConvert";
 import { COLORS, GRAY_RANGE } from "../colors";
 
 const SearchFilterContainer = styled.div`
-  width: 100%;
+  width: 20rem;
   margin-bottom: 2rem;
   color: #000;
 `;
@@ -22,7 +22,7 @@ function hexIsValid(hex: string) {
   return /^#?([0-9A-F]{3}){1,2}$/i.test(hex);
 }
 
-export const Input = ({
+export const MultiColorInput = ({
   placeholder,
   setInput
 }: {
