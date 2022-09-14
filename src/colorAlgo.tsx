@@ -83,7 +83,7 @@ export function generateColors(hex: string): GenerateColorsResult[] {
     provideInverted: true,
     lockHexInverted: hex,
     rotation: "cw", //"clockwise" | "counterclockwise" | "cw" | "ccw";
-    name: "basicColorChoice"
+    name: `COLOR_${hex.slice(1).toUpperCase()}`
   };
 
   return colorAlgoLib.generate(props, options);

@@ -1,7 +1,6 @@
 @import-normalize;
 
-body,
-button {
+body {
   font-family: "Roboto", sans-serif;
   font-size: 24px;
 
@@ -11,8 +10,8 @@ button {
 }
 
 button {
-  font-weight: 500;
-  font-variant: small-caps;
+  font-weight: 300;
+  font-size: 1.25rem;
   border: none;
   padding: 6px 30px;
   border: 1px solid transparent;

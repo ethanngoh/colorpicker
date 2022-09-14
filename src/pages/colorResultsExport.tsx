@@ -1,24 +1,39 @@
 import styled from "@emotion/styled";
+import { CopyBlock, monokaiSublime } from "react-code-blocks";
+
 import { generateColors, GenerateColorsResult } from "../colorAlgo";
-import { FlexCol, H1, H2 } from "../stylePrimitives";
 
 const ResultsContainer = styled.div`
-  width: 100%;
-  display: flex;
+  width: 30rem;
   gap: 2rem;
+  font-size: 1rem;
+  height: 30rem;
+  overflow-y: auto;
+  border: 1px solid gray;
 `;
 
 export const ColorResultsExport = ({ colors }: { colors: string[] }) => {
   const colGen = colors.map((c) => {
     const gen = generateColors(c);
+
     const lightOut = generateTypescript(gen[0], "_LIGHT");
     const darkOut = generateTypescript(gen[1], "_DARK");
 
-    const ret = "\n".concat(lightOut, darkOut);
+    const ret = [lightOut, darkOut].join("\n\n");
     return ret;
   });
 
-  return <ResultsContainer>{colGen}</ResultsContainer>;
+  return (
+    <ResultsContainer>
+      <CopyBlock
+        text={colGen.join("\n\n")}
+        language={"typescript"}
+        showLineNumbers={true}
+        theme={monokaiSublime}
+        wrapLines
+      />
+    </ResultsContainer>
+  );
 };
 
 function generateTypescript(obj: GenerateColorsResult, suffix: string) {
@@ -26,7 +41,7 @@ function generateTypescript(obj: GenerateColorsResult, suffix: string) {
     const key = (d.step * 100).toString();
     return [key, d.hex];
   });
-  const lightJson = JSON.stringify(Object.fromEntries(entries), null, 2);
+  const lightJson = JSON.stringify(Object.fromEntries(entries), null, 4);
   const tsOutput = `${obj.name}${suffix} = ${lightJson};`;
   return tsOutput;
 }

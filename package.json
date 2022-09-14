@@ -17,6 +17,9 @@
     "@types/react": "^18.0.15",
     "@types/react-animations": "^1.0.0",
     "@types/react-dom": "^18.0.6",
+    "@uiw/react-color": "^1.1.0",
+    "@uiw/react-color-block": "^1.1.0",
+    "@uiw/react-color-wheel": "^1.1.0",
     "dagre": "^0.8.5",
     "graphology": "^0.24.1",
     "graphology-shortest-path": "^2.0.1",
@@ -25,6 +28,8 @@
     "papaparse": "^5.3.2",
     "prettier": "^2.2.1",
     "react": "^18.2.0",
+    "react-code-blocks": "^0.0.9-0",
+    "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
@@ -62,6 +67,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-color": "^3.0.6",
     "@types/smooth-scroll": "^16.1.1"
   }
 }

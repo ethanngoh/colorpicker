@@ -7,7 +7,7 @@ import { getContrastTextColor, hexToHsl } from "../colorConvert";
 import { COLORS, GRAY_RANGE } from "../colors";
 
 const SearchFilterContainer = styled.div`
-  width: 20rem;
+  min-width: 20rem;
   margin-bottom: 2rem;
   color: #000;
 `;
@@ -24,12 +24,13 @@ function hexIsValid(hex: string) {
 
 export const MultiColorInput = ({
   placeholder,
+  input,
   setInput
 }: {
   placeholder?: string;
+  input: any;
   setInput: React.Dispatch<React.SetStateAction<any>>;
 }) => {
-  const [value, setValue] = useState([] as readonly SelectOption[]);
   const [inputValue, setInputValue] = useState("");
 
   const customStyle = {
@@ -106,18 +107,18 @@ export const MultiColorInput = ({
 
         if (!hexIsValid(valWithHex)) {
           setInputValue("");
-          console.log(`${value} must be valid hex code`);
+          console.log(`${input} must be valid hex code`);
           return;
         }
 
         const val = [
-          ...value,
+          ...input,
           {
             label: `#${valWithHex}`,
             value: `#${valWithHex}`
           }
         ];
-        setValue(val);
+        debugger;
         setInput(val);
         setInputValue("");
         console.log(`Added #${valWithHex}`);
@@ -134,12 +135,11 @@ export const MultiColorInput = ({
         onKeyDown={handleKeyDown}
         onInputChange={(inputValue: string) => setInputValue(inputValue)}
         onChange={(value: OnChangeValue<SelectOption, true>, actionMeta: ActionMeta<SelectOption>) => {
-          setValue(value);
           setInput(value);
         }}
         styles={customStyle}
         placeholder={placeholder}
-        value={value}
+        value={input}
         inputValue={inputValue}
       />
     </SearchFilterContainer>
