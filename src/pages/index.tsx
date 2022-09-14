@@ -1,12 +1,10 @@
 import styled from "@emotion/styled";
 import { ColorResult } from "@uiw/color-convert";
 import { Block, Wheel } from "@uiw/react-color";
-
-import React, { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { MultiValue } from "react-select";
-import Select from "react-select/dist/declarations/src/Select";
-import { HARMONIES } from "../colorHarmonies";
 
+import { HARMONIES } from "../colorHarmonies";
 import { GRAY_RANGE } from "../colors";
 import { ColorHarmonyInput } from "../components/colorHarmonyInput";
 import { MultiColorInput, SelectOption } from "../components/multiColorInput";

@@ -19,11 +19,6 @@ const NavBrandText = styled.div`
   color: ${GRAY_RANGE[0]};
 `;
 
-const NavBrandImg = styled.img`
-  width: 30px;
-  margin-right: 0.6em;
-`;
-
 const NavBrandContainer = styled.div`
   display: flex;
   align-items: center;

@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import { KeyboardEventHandler, useState } from "react";
-import Select, { ActionMeta, OnChangeValue } from "react-select";
+import { ActionMeta, OnChangeValue } from "react-select";
 import CreatableSelect from "react-select/creatable";
 
-import { getContrastTextColor, hexToHsl } from "../colorConvert";
+import { getContrastTextColor } from "../colorConvert";
 import { COLORS, GRAY_RANGE } from "../colors";
 
 const SearchFilterContainer = styled.div`
@@ -57,7 +57,7 @@ export const MultiColorInput = ({
     }),
     multiValue: (provided: any, state: any) => {
       const colorHex = state.data.value;
-      const { h, s, l } = hexToHsl(colorHex);
+      // const { h, s, l } = hexToHsl(colorHex);
       return {
         ...provided,
         backgroundColor: colorHex,

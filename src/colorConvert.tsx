@@ -26,7 +26,7 @@ export function hexToHsl(hex: string) {
   var s = 0;
   var l = (max + min) / 2;
 
-  if (max == min) {
+  if (max === min) {
     h = s = 0; // achromatic
   } else {
     var d = max - min;

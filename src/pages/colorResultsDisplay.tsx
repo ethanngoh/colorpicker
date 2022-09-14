@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
+
 import { generateColors } from "../colorAlgo";
-import { FlexCol, H1, H2 } from "../stylePrimitives";
+import { FlexCol, H2 } from "../stylePrimitives";
 
 const ResultsContainer = styled.div`
   width: 100%;

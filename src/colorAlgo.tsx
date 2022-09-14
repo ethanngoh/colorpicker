@@ -55,9 +55,7 @@ export interface GenerateColorsResult {
 }
 
 export function generateColors(hex: string): GenerateColorsResult[] {
-  const { h, s, l } = hexToHsl(hex);
-  const h3 = h * 360;
-  const h4 = h3 + 8;
+  const { h } = hexToHsl(hex);
   const props: Props = {
     steps: 10,
     hue: {
