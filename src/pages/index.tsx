@@ -4,8 +4,11 @@ import { Block, Wheel } from "@uiw/react-color";
 
 import React, { useCallback, useEffect, useState } from "react";
 import { MultiValue } from "react-select";
+import Select from "react-select/dist/declarations/src/Select";
+import { HARMONIES } from "../colorHarmonies";
 
 import { GRAY_RANGE } from "../colors";
+import { ColorHarmonyInput } from "../components/colorHarmonyInput";
 import { MultiColorInput, SelectOption } from "../components/multiColorInput";
 import { Navigation } from "../components/navbar";
 import { useBackgroundColor } from "../hooks/useBackgroundColor";
@@ -25,6 +28,8 @@ const Content = styled.div`
 const Frame = styled(FlexCol)`
   align-items: center;
   padding: 1rem;
+  gap: 1em;
+  border-bottom: 1px solid white;
 `;
 const ColorPickers = styled.div`
   display: flex;
@@ -42,6 +47,7 @@ export const Index = () => {
     { label: "#987654", value: "#987654" }
   ]);
   const [pickedColor, setPickedColor] = useState({ hsva: { h: 0, s: 0, v: 68, a: 1 } } as ColorResult);
+  const [harmony, setHarmony] = useState("analogous");
 
   return (
     <>
@@ -58,26 +64,26 @@ export const Index = () => {
             />
             <Block color={pickedColor.hsva} onChange={(color) => setPickedColor(color)} colors={[]} />
           </ColorPickers>
+          <ColorHarmonyInput harmonies={Object.keys(HARMONIES)} harmony={harmony} setHarmony={setHarmony} />
+          <button
+            onClick={(e) => {
+              setColors([
+                ...colors,
+                {
+                  label: pickedColor.hex,
+                  value: pickedColor.hex
+                }
+              ]);
+            }}
+          >
+            Pick
+          </button>
         </Frame>
-        <button
-          onClick={(e) => {
-            setColors([
-              ...colors,
-              {
-                label: pickedColor.hex,
-                value: pickedColor.hex
-              }
-            ]);
-          }}
-        >
-          Pick
-        </button>
-
         <Frame>
           <H1>Shade Generator</H1>
           <MultiColorInput placeholder={"Type Hex Colors"} input={colors} setInput={setColors} />
+          {colors && <ColorResultsDisplay colors={colors.map((c) => c.value)} />}
         </Frame>
-        <Frame>{colors && <ColorResultsDisplay colors={colors.map((c) => c.value)} />}</Frame>
         <Frame>
           <H1>Export</H1>
           {colors && <ColorResultsExport colors={colors.map((c) => c.value)} />}

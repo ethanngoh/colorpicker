@@ -66,14 +66,14 @@ export function generateColors(hex: string): GenerateColorsResult[] {
       curve: "easeInSine"
     },
     saturation: {
-      start: 0.8, // 0 - 1
-      end: 0.2, // 0 - 1
+      start: 0.1, // 0 - 1
+      end: 0.7, // 0 - 1
       curve: "easeInSine",
       rate: 1
     },
     brightness: {
       start: 1,
-      end: 0.2,
+      end: 0.1,
       curve: "easeInSine"
     }
   };
