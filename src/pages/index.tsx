@@ -40,11 +40,7 @@ export const Index = () => {
   useBackgroundColor(GRAY_RANGE[900]);
   useTextColor(GRAY_RANGE[0]);
 
-  const [colors, setColors] = useState<MultiValue<SelectOption>>([
-    { label: "#abcdef", value: "#abcdef" },
-    { label: "#123456", value: "#123456" },
-    { label: "#987654", value: "#987654" }
-  ]);
+  const [colors, setColors] = useState<MultiValue<SelectOption>>([]);
   const [pickedColor, setPickedColor] = useState(color("#123456") as ColorResult);
   const [harmony, setHarmony] = useState(HarmonyKey.analogous);
 
