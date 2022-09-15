@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { ColorResult } from "@uiw/color-convert";
 import { color, Colorful } from "@uiw/react-color";
+import Color from "color";
 import React, { useState } from "react";
 import { MultiValue } from "react-select";
 
@@ -72,16 +73,20 @@ export const Index = () => {
           <ColorHarmonyDisplay color={pickedColor} harmony={harmony} />
           <button
             onClick={(e) => {
-              setColors([
-                ...colors,
-                {
-                  label: pickedColor.hex,
-                  value: pickedColor.hex
-                }
-              ]);
+              const hslColor = pickedColor.hsl;
+              const harmonies = HARMONIES[harmony](hslColor.h, hslColor.s, hslColor.l);
+              const harmonySelects = harmonies.map((h) => {
+                const c = Color(h);
+                return {
+                  label: c.hex(),
+                  value: c.hex()
+                };
+              });
+
+              setColors([...colors, ...harmonySelects]);
             }}
           >
-            Pick
+            Generate Shades
           </button>
         </Frame>
         <HR />
