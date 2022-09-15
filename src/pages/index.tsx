@@ -15,7 +15,7 @@ import { ShadeResultsDisplay } from "../components/shadeResultsDisplay";
 import { ShadeResultsExport } from "../components/shadeResultsExport";
 import { useBackgroundColor } from "../hooks/useBackgroundColor";
 import { useTextColor } from "../hooks/useTextColor";
-import { FlexCol, H1, H2, HR } from "../stylePrimitives";
+import { FlexCol, H1, HR } from "../stylePrimitives";
 
 const Content = styled.div`
   display: flex;
