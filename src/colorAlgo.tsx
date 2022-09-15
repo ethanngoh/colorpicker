@@ -1,4 +1,4 @@
-import { hexToHsl } from "./colorConvert";
+import Color from "color";
 
 const colorAlgoLib = require("@k-vyn/coloralgorithm");
 
@@ -55,12 +55,15 @@ export interface GenerateColorsResult {
 }
 
 export function generateColors(hex: string): GenerateColorsResult[] {
-  const { h } = hexToHsl(hex);
+  const c = Color(hex);
+  const d = c.hsl().array();
+
+  const h = d[0];
   const props: Props = {
     steps: 10,
     hue: {
-      start: h * 360, // 0 - 359
-      end: h * 360 + 8, // 0 - 359
+      start: h, // 0 - 359
+      end: h + 8, // 0 - 359
       curve: "easeInSine"
     },
     saturation: {

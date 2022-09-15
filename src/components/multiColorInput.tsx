@@ -56,7 +56,6 @@ export const MultiColorInput = ({
     }),
     multiValue: (provided: any, state: any) => {
       const colorHex = state.data.value;
-      // const { h, s, l } = hexToHsl(colorHex);
       return {
         ...provided,
         backgroundColor: colorHex,
