@@ -116,7 +116,6 @@ export const MultiColorInput = ({
             value: `#${valWithHex}`
           }
         ];
-        debugger;
         setInput(val);
         setInputValue("");
         console.log(`Added #${valWithHex}`);
