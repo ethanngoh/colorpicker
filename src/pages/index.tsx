@@ -9,8 +9,9 @@ import { HARMONIES, HarmonyKey } from "../colorHarmonies";
 import { GRAY_RANGE } from "../colors";
 import { ColorHarmonyDisplay } from "../components/colorHarmonyDisplay";
 import { ColorHarmonyInput } from "../components/colorHarmonyInput";
-import { MultiColorInput, SelectOption } from "../components/multiColorInput";
+import { MultiColorInput } from "../components/multiColorInput";
 import { Navigation } from "../components/navbar";
+import { SelectOption } from "../components/selectBase";
 import { ShadeResultsDisplay } from "../components/shadeResultsDisplay";
 import { ShadeResultsExport } from "../components/shadeResultsExport";
 import { useBackgroundColor } from "../hooks/useBackgroundColor";
@@ -57,7 +58,6 @@ export const Index = () => {
                 setPickedColor(color);
               }}
             />
-            {/* <Block color={pickedColor.hsva} onChange={(color) => setPickedColor(color)} colors={[]} /> */}
           </ColorPickers>
           <ColorHarmonyInput
             harmonies={Object.keys(HARMONIES) as HarmonyKey[]}
@@ -82,7 +82,7 @@ export const Index = () => {
               setColors([...colors, ...harmonySelects]);
             }}
           >
-            Generate Shades
+            Use Colors
           </button>
         </Frame>
         <HR />

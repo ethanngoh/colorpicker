@@ -5,14 +5,13 @@ import CreatableSelect from "react-select/creatable";
 
 import { getContrastTextColor } from "../colorConvert";
 import { COLORS, GRAY_RANGE } from "../colors";
+import { SelectOption } from "./selectBase";
 
 const SearchFilterContainer = styled.div`
   min-width: 20rem;
   margin-bottom: 2rem;
   color: #000;
 `;
-
-export type SelectOption = { value: string; label: string };
 
 const components = {
   DropdownIndicator: null

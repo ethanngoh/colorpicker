@@ -3,14 +3,13 @@ import Select, { ActionMeta, SingleValue } from "react-select";
 import { HarmonyKey } from "../colorHarmonies";
 
 import { COLORS, GRAY_RANGE } from "../colors";
+import { SelectOption } from "./selectBase";
 
 const SearchFilterContainer = styled.div`
   width: 100%;
   margin-bottom: 2rem;
   color: #000;
 `;
-
-type SelectOption = { value: string; label: string };
 
 export const ColorHarmonyInput = ({
   harmonies,
