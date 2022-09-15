@@ -1,4 +1,6 @@
-export function hexToHsl(hex: string) {
+import { HslColor } from "@uiw/react-color";
+
+export function hexToHsl(hex: string): HslColor {
   if (hex.indexOf("#") === 0) {
     hex = hex.slice(1);
   }

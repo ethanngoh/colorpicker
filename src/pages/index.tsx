@@ -1,19 +1,20 @@
 import styled from "@emotion/styled";
 import { ColorResult } from "@uiw/color-convert";
-import { Block, Wheel } from "@uiw/react-color";
-import { useState } from "react";
+import { color, Colorful } from "@uiw/react-color";
+import React, { useState } from "react";
 import { MultiValue } from "react-select";
 
-import { HARMONIES } from "../colorHarmonies";
+import { HARMONIES, HarmonyKey } from "../colorHarmonies";
 import { GRAY_RANGE } from "../colors";
+import { ColorHarmonyDisplay } from "../components/colorHarmonyDisplay";
 import { ColorHarmonyInput } from "../components/colorHarmonyInput";
 import { MultiColorInput, SelectOption } from "../components/multiColorInput";
 import { Navigation } from "../components/navbar";
+import { ShadeResultsDisplay } from "../components/shadeResultsDisplay";
+import { ShadeResultsExport } from "../components/shadeResultsExport";
 import { useBackgroundColor } from "../hooks/useBackgroundColor";
 import { useTextColor } from "../hooks/useTextColor";
-import { FlexCol, H1 } from "../stylePrimitives";
-import { ColorResultsDisplay } from "./colorResultsDisplay";
-import { ColorResultsExport } from "./colorResultsExport";
+import { FlexCol, H1, H2, HR } from "../stylePrimitives";
 
 const Content = styled.div`
   display: flex;
@@ -25,10 +26,9 @@ const Content = styled.div`
 
 const Frame = styled(FlexCol)`
   align-items: center;
-  padding: 1rem;
   gap: 1em;
-  border-bottom: 1px solid white;
 `;
+
 const ColorPickers = styled.div`
   display: flex;
   align-items: center;
@@ -44,8 +44,8 @@ export const Index = () => {
     { label: "#123456", value: "#123456" },
     { label: "#987654", value: "#987654" }
   ]);
-  const [pickedColor, setPickedColor] = useState({ hsva: { h: 0, s: 0, v: 68, a: 1 } } as ColorResult);
-  const [harmony, setHarmony] = useState("analogous");
+  const [pickedColor, setPickedColor] = useState(color("#123456") as ColorResult);
+  const [harmony, setHarmony] = useState(HarmonyKey.analogous);
 
   return (
     <>
@@ -54,15 +54,22 @@ export const Index = () => {
         <Frame>
           <H1>Color Picker</H1>
           <ColorPickers>
-            <Wheel
+            <Colorful
               color={pickedColor.hsva}
               onChange={(color) => {
                 setPickedColor(color);
               }}
             />
-            <Block color={pickedColor.hsva} onChange={(color) => setPickedColor(color)} colors={[]} />
+            {/* <Block color={pickedColor.hsva} onChange={(color) => setPickedColor(color)} colors={[]} /> */}
           </ColorPickers>
-          <ColorHarmonyInput harmonies={Object.keys(HARMONIES)} harmony={harmony} setHarmony={setHarmony} />
+          <ColorHarmonyInput
+            harmonies={Object.keys(HARMONIES) as HarmonyKey[]}
+            harmony={harmony}
+            setHarmony={setHarmony}
+          />
+        </Frame>
+        <Frame>
+          <ColorHarmonyDisplay color={pickedColor} harmony={harmony} />
           <button
             onClick={(e) => {
               setColors([
@@ -77,14 +84,16 @@ export const Index = () => {
             Pick
           </button>
         </Frame>
+        <HR />
         <Frame>
           <H1>Shade Generator</H1>
           <MultiColorInput placeholder={"Type Hex Colors"} input={colors} setInput={setColors} />
-          {colors && <ColorResultsDisplay colors={colors.map((c) => c.value)} />}
+          {colors && <ShadeResultsDisplay colors={colors.map((c) => c.value)} />}
         </Frame>
+        <HR />
         <Frame>
           <H1>Export</H1>
-          {colors && <ColorResultsExport colors={colors.map((c) => c.value)} />}
+          {colors && <ShadeResultsExport colors={colors.map((c) => c.value)} />}
         </Frame>
       </Content>
     </>

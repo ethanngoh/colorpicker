@@ -12,7 +12,7 @@ const ResultsContainer = styled.div`
   border: 1px solid gray;
 `;
 
-export const ColorResultsExport = ({ colors }: { colors: string[] }) => {
+export const ShadeResultsExport = ({ colors }: { colors: string[] }) => {
   const colGen = colors.map((c) => {
     const gen = generateColors(c);
 

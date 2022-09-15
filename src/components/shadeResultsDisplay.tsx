@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 import { generateColors } from "../colorAlgo";
-import { FlexCol, H2 } from "../stylePrimitives";
+import { FlexCol } from "../stylePrimitives";
 
 const ResultsContainer = styled.div`
   width: 100%;
@@ -21,6 +21,7 @@ type ColorDisplayProps = {
 const LightDarkModeContainer = styled.div`
   display: flex;
   gap: 1rem;
+  margin-top: 1rem;
 `;
 
 const ColorDisplay = styled.div<ColorDisplayProps>`
@@ -28,11 +29,17 @@ const ColorDisplay = styled.div<ColorDisplayProps>`
   padding: 0.25rem 2rem;
 `;
 
+const ColorText = styled.span`
+  font-size: 1.25rem;
+  font-weight: 400;
+  font-family: "Roboto Mono", monospace;
+`;
+
 const Result = ({ color }: { color: string }) => {
   const r = generateColors(color);
   return (
     <ResultContainer>
-      <H2>{color}</H2>
+      <ColorText>{color}</ColorText>
       <LightDarkModeContainer>
         <FlexCol>
           {r[0].colors.map((c) => {
@@ -49,7 +56,7 @@ const Result = ({ color }: { color: string }) => {
   );
 };
 
-export const ColorResultsDisplay = ({ colors }: { colors: string[] }) => {
+export const ShadeResultsDisplay = ({ colors }: { colors: string[] }) => {
   return (
     <ResultsContainer>
       {colors.map((c) => (

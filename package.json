@@ -10,6 +10,7 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/color": "^3.0.3",
     "@types/dagre": "^0.7.48",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.11.45",
@@ -18,8 +19,7 @@
     "@types/react-animations": "^1.0.0",
     "@types/react-dom": "^18.0.6",
     "@uiw/react-color": "^1.1.0",
-    "@uiw/react-color-block": "^1.1.0",
-    "@uiw/react-color-wheel": "^1.1.0",
+    "color": "^4.2.3",
     "dagre": "^0.8.5",
     "graphology": "^0.24.1",
     "graphology-shortest-path": "^2.0.1",
@@ -30,8 +30,8 @@
     "prettier": "^2.2.1",
     "react": "^18.2.0",
     "react-code-blocks": "^0.0.9-0",
-    "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.4.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-select": "^5.4.0",
@@ -70,5 +70,6 @@
   "devDependencies": {
     "@types/react-color": "^3.0.6",
     "@types/smooth-scroll": "^16.1.1"
-  }
+  },
+  "homepage": "http://colorpicker.ethangoh.com/"
 }
