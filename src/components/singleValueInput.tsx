@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import Select, { ActionMeta, SingleValue } from "react-select";
-import { HarmonyKey } from "../colorHarmonies";
 
 import { COLORS, GRAY_RANGE } from "../colors";
 import { SelectOption } from "./selectBase";
@@ -11,17 +10,17 @@ const SearchFilterContainer = styled.div`
   color: #000;
 `;
 
-export const ColorHarmonyInput = ({
-  harmonies,
-  harmony,
-  setHarmony
+export const SingleValueInput = <T extends string>({
+  selections,
+  currentValue,
+  setCurrentValue
 }: {
-  harmonies: HarmonyKey[];
-  harmony: HarmonyKey;
-  setHarmony: React.Dispatch<React.SetStateAction<HarmonyKey>>;
+  selections: T[];
+  currentValue: T;
+  setCurrentValue: React.Dispatch<React.SetStateAction<T>>;
 }) => {
   const options = [
-    ...harmonies.map((d) => {
+    ...selections.map((d) => {
       return {
         value: d,
         label: d
@@ -61,9 +60,9 @@ export const ColorHarmonyInput = ({
         className="select"
         classNamePrefix="select"
         styles={customStyle}
-        value={{ label: harmony, value: harmony }}
+        value={{ label: currentValue, value: currentValue }}
         onChange={(newValue: SingleValue<SelectOption>, actionMeta: ActionMeta<SelectOption>) => {
-          setHarmony(newValue?.value as HarmonyKey);
+          setCurrentValue(newValue?.value as T);
         }}
       />
     </SearchFilterContainer>

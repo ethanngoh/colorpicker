@@ -7,12 +7,12 @@ import { MultiValue } from "react-select";
 import { HARMONIES, HarmonyKey } from "../colorHarmonies";
 import { GRAY_RANGE } from "../colors";
 import { ColorHarmonyDisplay } from "../components/colorHarmonyDisplay";
-import { ColorHarmonyInput } from "../components/colorHarmonyInput";
 import { MultiColorInput } from "../components/multiColorInput";
 import { Navigation } from "../components/navbar";
 import { SelectOption } from "../components/selectBase";
 import { ShadeResultsDisplay } from "../components/shadeResultsDisplay";
 import { ShadeResultsExport } from "../components/shadeResultsExport";
+import { SingleValueInput } from "../components/singleValueInput";
 import { useBackgroundColor } from "../hooks/useBackgroundColor";
 import { useTextColor } from "../hooks/useTextColor";
 import { FlexCol, H1, HR } from "../stylePrimitives";
@@ -53,10 +53,10 @@ export const Index = () => {
           <ColorPickers>
             <HexColorPicker color={pickedColor} onChange={setPickedColor} />
           </ColorPickers>
-          <ColorHarmonyInput
-            harmonies={Object.keys(HARMONIES) as HarmonyKey[]}
-            harmony={harmony}
-            setHarmony={setHarmony}
+          <SingleValueInput
+            selections={Object.values(HarmonyKey)}
+            currentValue={harmony}
+            setCurrentValue={setHarmony}
           />
         </Frame>
         <Frame>
