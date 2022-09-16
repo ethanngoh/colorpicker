@@ -1,6 +1,5 @@
 import { css } from "@emotion/css";
 import styled from "@emotion/styled";
-import { ColorResult, HslColor } from "@uiw/react-color";
 import Color from "color";
 import { AiFillCaretDown } from "react-icons/ai";
 
@@ -32,19 +31,19 @@ const ColorText = styled.span`
   font-family: "Roboto Mono", monospace;
 `;
 
-const Result = ({ color }: { color: HslColor }) => {
-  const c = Color(color);
+const Result = ({ color }: { color: string }) => {
   return (
     <ResultContainer>
-      <ColorDisplay color={c.hex()} />
-      <ColorText>{c.hex()}</ColorText>
+      <ColorDisplay color={color} />
+      <ColorText>{color}</ColorText>
     </ResultContainer>
   );
 };
 
-export const ColorHarmonyDisplay = ({ color, harmony }: { color: ColorResult; harmony: HarmonyKey }) => {
-  const hslColor = color.hsl;
-  const colors = HARMONIES[harmony](hslColor.h, hslColor.s, hslColor.l);
+export const ColorHarmonyDisplay = ({ color, harmony }: { color: string; harmony: HarmonyKey }) => {
+  const c = Color(color);
+  const hslColor = c.hsl().array();
+  const harmonies = HARMONIES[harmony](hslColor[0], hslColor[1], hslColor[2]);
 
   return (
     <div
@@ -58,9 +57,10 @@ export const ColorHarmonyDisplay = ({ color, harmony }: { color: ColorResult; ha
         <AiFillCaretDown />
       </H2>
       <ResultsContainer>
-        {colors.map((c) => (
-          <Result color={c} />
-        ))}
+        {harmonies.map((harmony) => {
+          const c = Color(harmony);
+          return <Result color={c.hex()} />;
+        })}
       </ResultsContainer>
     </div>
   );

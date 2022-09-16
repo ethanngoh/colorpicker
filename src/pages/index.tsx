@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
-import { ColorResult } from "@uiw/color-convert";
-import { color, Colorful } from "@uiw/react-color";
 import Color from "color";
 import React, { useState } from "react";
+import { HexColorPicker } from "react-colorful";
 import { MultiValue } from "react-select";
 
 import { HARMONIES, HarmonyKey } from "../colorHarmonies";
@@ -42,7 +41,7 @@ export const Index = () => {
   useTextColor(GRAY_RANGE[0]);
 
   const [colors, setColors] = useState<MultiValue<SelectOption>>([]);
-  const [pickedColor, setPickedColor] = useState(color("#123456") as ColorResult);
+  const [pickedColor, setPickedColor] = useState("#b32aa9");
   const [harmony, setHarmony] = useState(HarmonyKey.analogous);
 
   return (
@@ -52,12 +51,7 @@ export const Index = () => {
         <Frame>
           <H1>Color Picker</H1>
           <ColorPickers>
-            <Colorful
-              color={pickedColor.hsva}
-              onChange={(color) => {
-                setPickedColor(color);
-              }}
-            />
+            <HexColorPicker color={pickedColor} onChange={setPickedColor} />
           </ColorPickers>
           <ColorHarmonyInput
             harmonies={Object.keys(HARMONIES) as HarmonyKey[]}
@@ -69,8 +63,10 @@ export const Index = () => {
           <ColorHarmonyDisplay color={pickedColor} harmony={harmony} />
           <button
             onClick={(e) => {
-              const hslColor = pickedColor.hsl;
-              const harmonies = HARMONIES[harmony](hslColor.h, hslColor.s, hslColor.l);
+              const c = Color(pickedColor);
+              const hslColor = c.hsl().array();
+              const harmonies = HARMONIES[harmony](hslColor[0], hslColor[1], hslColor[2]);
+
               const harmonySelects = harmonies.map((h) => {
                 const c = Color(h);
                 return {

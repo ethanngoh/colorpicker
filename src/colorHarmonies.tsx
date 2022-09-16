@@ -1,5 +1,3 @@
-import { HslColor } from "@uiw/react-color";
-
 export enum HarmonyKey {
   analogous = "analogous",
   monochromatic = "monochromatic",
@@ -10,7 +8,17 @@ export enum HarmonyKey {
   square = "square"
 }
 
-export const HARMONIES: { [key in HarmonyKey]: (h: number, s: number, l: number) => HslColor[] } = {
+export const HARMONIES: {
+  [key in HarmonyKey]: (
+    h: number,
+    s: number,
+    l: number
+  ) => {
+    h: number;
+    s: number;
+    l: number;
+  }[];
+} = {
   analogous: (h: number, s: number, l: number) => {
     return [
       { h: (h - 30) % 360, s, l },

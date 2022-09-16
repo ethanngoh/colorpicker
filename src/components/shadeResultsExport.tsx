@@ -42,6 +42,6 @@ function generateTypescript(obj: GenerateColorsResult, suffix: string) {
     return [key, d.hex];
   });
   const lightJson = JSON.stringify(Object.fromEntries(entries), null, 4);
-  const tsOutput = `${obj.name}${suffix} = ${lightJson};`;
+  const tsOutput = `export const ${obj.name}${suffix} = ${lightJson};`;
   return tsOutput;
 }
