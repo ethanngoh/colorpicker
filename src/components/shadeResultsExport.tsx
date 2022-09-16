@@ -42,21 +42,22 @@ export const ShadeResultsExport = ({ colors }: { colors: string[] }) => {
   });
 
   return (
-    <ResultsContainer>
-      <span>{language}</span>
+    <>
       <SingleValueInput
         selections={Object.values(SupportedLanguageKey)}
         currentValue={language}
         setCurrentValue={setLanguage}
       />
-      <CopyBlock
-        text={colGen.join("\n\n")}
-        language={language}
-        showLineNumbers={true}
-        theme={monokaiSublime}
-        wrapLines
-      />
-    </ResultsContainer>
+      <ResultsContainer>
+        <CopyBlock
+          text={colGen.join("\n\n")}
+          language={language}
+          showLineNumbers={true}
+          theme={monokaiSublime}
+          wrapLines
+        />
+      </ResultsContainer>
+    </>
   );
 };
 
