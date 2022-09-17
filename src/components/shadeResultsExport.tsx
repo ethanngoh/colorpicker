@@ -76,7 +76,11 @@ function generateJson(obj: GenerateColorsResult, suffix: string) {
     const key = (d.step * 100).toString();
     return [key, d.hex];
   });
-  const lightJson = JSON.stringify(Object.fromEntries(entries), null, 4);
-  const tsOutput = `export const ${obj.name}${suffix} = ${lightJson};`;
-  return tsOutput;
+
+  const json = {
+    name: `${obj.name}${suffix}`,
+    colors: Object.fromEntries(entries)
+  };
+
+  return JSON.stringify(json, null, 4);
 }
