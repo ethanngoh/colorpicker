@@ -3,11 +3,10 @@ import { useState } from "react";
 import { CopyBlock, monokaiSublime } from "react-code-blocks";
 
 import { generateColors, GenerateColorsResult } from "../colorAlgo";
-import { FlexCol } from "../stylePrimitives";
 import { SingleValueInput } from "./singleValueInput";
 
-const ResultsContainer = styled(FlexCol)`
-  width: 30rem;
+const ResultsContainer = styled.div`
+  min-width: 30rem;
   gap: 2rem;
   font-size: 1rem;
   height: 30rem;
@@ -17,14 +16,16 @@ const ResultsContainer = styled(FlexCol)`
 
 export enum SupportedLanguageKey {
   typescript = "typescript",
-  json = "json"
+  json = "json",
+  python = "python"
 }
 
 const LANGUAGE_TO_CODE_GENERATOR: {
   [key in SupportedLanguageKey]: (obj: GenerateColorsResult, suffix: string) => string;
 } = {
   typescript: generateTypescript,
-  json: generateJson
+  json: generateJson,
+  python: generatePython
 };
 
 export const ShadeResultsExport = ({ colors }: { colors: string[] }) => {
@@ -83,4 +84,15 @@ function generateJson(obj: GenerateColorsResult, suffix: string) {
   };
 
   return JSON.stringify(json, null, 4);
+}
+
+function generatePython(obj: GenerateColorsResult, suffix: string) {
+  const entries = obj.colors.map((d) => {
+    const key = (d.step * 100).toString();
+    return [key, d.hex];
+  });
+
+  const lightJson = JSON.stringify(Object.fromEntries(entries), null, 4);
+  const tsOutput = `${obj.name}${suffix} = ${lightJson};`;
+  return tsOutput;
 }
