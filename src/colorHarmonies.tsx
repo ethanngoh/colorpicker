@@ -40,9 +40,9 @@ export const HARMONIES: {
   triad: (h: number, s: number, l: number) => {
     return [
       { h: (h - 120) % 360, s, l },
-      { h: (h - 120) % 360, s: s * 0.8, l },
+      { h: (h - 120) % 360, s: s * 0.6, l },
       { h, s, l },
-      { h: (h + 120) % 360, s: s * 0.8, l },
+      { h: (h + 120) % 360, s: s * 0.6, l },
       { h: (h + 120) % 360, s, l }
     ];
   },

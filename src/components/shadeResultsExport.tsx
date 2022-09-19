@@ -16,6 +16,7 @@ const ResultsContainer = styled.div`
 
 export enum SupportedLanguageKey {
   typescript = "typescript",
+  javascript = "javascript",
   json = "json",
   python = "python"
 }
@@ -24,6 +25,7 @@ const LANGUAGE_TO_CODE_GENERATOR: {
   [key in SupportedLanguageKey]: (obj: GenerateColorsResult, suffix: string) => string;
 } = {
   typescript: generateTypescript,
+  javascript: generateJavascript,
   json: generateJson,
   python: generatePython
 };
@@ -94,5 +96,16 @@ function generatePython(obj: GenerateColorsResult, suffix: string) {
 
   const lightJson = JSON.stringify(Object.fromEntries(entries), null, 4);
   const tsOutput = `${obj.name}${suffix} = ${lightJson};`;
+  return tsOutput;
+}
+
+function generateJavascript(obj: GenerateColorsResult, suffix: string) {
+  const entries = obj.colors.map((d) => {
+    const key = (d.step * 100).toString();
+    return [key, d.hex];
+  });
+
+  const lightJson = JSON.stringify(Object.fromEntries(entries), null, 4);
+  const tsOutput = `var ${obj.name}${suffix} = ${lightJson};`;
   return tsOutput;
 }
