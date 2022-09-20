@@ -23,5 +23,6 @@ export const FlexCol = styled.div`
 export const HR = styled.hr`
   border: 0;
   border-bottom: 1px solid white;
-  width: 100%;
+  width: 25%;
+  margin: 3rem 0 3rem 0;
 `;

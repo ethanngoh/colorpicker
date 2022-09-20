@@ -8,7 +8,6 @@ import { HARMONIES, HarmonyKey } from "../colorHarmonies";
 import { GRAY_RANGE } from "../colors";
 import { ColorHarmonyDisplay } from "../components/colorHarmonyDisplay";
 import { MultiColorInput } from "../components/multiColorInput";
-import { Navigation } from "../components/navbar";
 import { SelectOption } from "../components/selectBase";
 import { ShadeResultsDisplay } from "../components/shadeResultsDisplay";
 import { ShadeResultsExport } from "../components/shadeResultsExport";
@@ -46,7 +45,6 @@ export const Index = () => {
 
   return (
     <>
-      <Navigation />
       <Content>
         <Frame>
           <H1>Color Picker</H1>
