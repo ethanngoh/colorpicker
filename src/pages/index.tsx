@@ -51,7 +51,14 @@ export const Index = () => {
         <Frame>
           <H1>Color Picker</H1>
           <ColorPickers>
-            <HexColorPicker color={pickedColor} onChange={setPickedColor} />
+            <HexColorPicker
+              color={pickedColor}
+              onChange={setPickedColor}
+              style={{
+                width: "15rem",
+                height: "15rem"
+              }}
+            />
           </ColorPickers>
           <SingleValueInput
             selections={Object.values(HarmonyKey)}
