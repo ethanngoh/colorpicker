@@ -6,7 +6,6 @@ import { SelectOption } from "./selectBase";
 
 const Container = styled.div`
   min-width: 14em;
-  margin-bottom: 2rem;
   color: #000;
 `;
 

@@ -1,17 +1,21 @@
 import styled from "@emotion/styled";
+import { isXS } from "../breakpoints";
 
 import { generateColors } from "../colorAlgo";
-import { FlexCol } from "../stylePrimitives";
+import { FlexCol, FlexRow } from "../stylePrimitives";
 
-const ResultsContainer = styled.div`
+const ResultsContainer = styled(FlexCol)`
   width: 100%;
-  display: flex;
-  gap: 2rem;
+  justify-content: center;
 `;
 
 const ResultContainer = styled(FlexCol)`
   align-items: center;
   justify-content: center;
+`;
+
+const ColorChunk = styled(FlexRow)`
+  justify-content: space-between;
 `;
 
 type ColorDisplayProps = {
@@ -20,8 +24,10 @@ type ColorDisplayProps = {
 
 const LightDarkModeContainer = styled.div`
   display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
+  gap: 0.25rem;
+  margin-top: 0.25rem;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ColorDisplay = styled.div<ColorDisplayProps>`
@@ -30,8 +36,7 @@ const ColorDisplay = styled.div<ColorDisplayProps>`
 `;
 
 const ColorText = styled.span`
-  font-size: 1.25rem;
-  font-weight: 400;
+  font-size: 1rem;
   font-family: "Roboto Mono", monospace;
 `;
 
@@ -46,21 +51,34 @@ const Result = ({ color }: { color: string }) => {
             return <ColorDisplay color={c.hex}>&nbsp;</ColorDisplay>;
           })}
         </FlexCol>
-        <FlexCol>
-          {r[1].colors.map((c) => {
-            return <ColorDisplay color={c.hex}>&nbsp;</ColorDisplay>;
-          })}
-        </FlexCol>
+        {!isXS() ? (
+          <FlexCol>
+            {r[1].colors.map((c) => {
+              return <ColorDisplay color={c.hex}>&nbsp;</ColorDisplay>;
+            })}
+          </FlexCol>
+        ) : null}
       </LightDarkModeContainer>
     </ResultContainer>
   );
 };
 
 export const ShadeResultsDisplay = ({ colors }: { colors: string[] }) => {
+  const chunkSize = 5;
+  const chunks: string[][] = [];
+  for (let i = 0; i < colors.length; i += chunkSize) {
+    const chunk = colors.slice(i, i + chunkSize);
+    chunks.push(chunk);
+  }
+
   return (
-    <ResultsContainer>
-      {colors.map((c) => (
-        <Result color={c} />
+    <ResultsContainer gap="0.75rem">
+      {chunks.map((colors) => (
+        <ColorChunk>
+          {colors.map((c) => (
+            <Result color={c} />
+          ))}
+        </ColorChunk>
       ))}
     </ResultsContainer>
   );

@@ -14,26 +14,15 @@ import { ShadeResultsExport } from "../components/shadeResultsExport";
 import { SingleValueInput } from "../components/singleValueInput";
 import { useBackgroundColor } from "../hooks/useBackgroundColor";
 import { useTextColor } from "../hooks/useTextColor";
-import { FlexCol, H1, HR } from "../stylePrimitives";
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 50px;
-  padding-top: 80px;
-`;
-
-const Frame = styled(FlexCol)`
-  align-items: center;
-  gap: 1em;
-`;
+import { FlexColC, H1, HR, Page } from "../stylePrimitives";
 
 const ColorPickers = styled.div`
   display: flex;
   align-items: center;
   gap: 1em;
 `;
+
+const maxPageWidth = "1024px";
 
 export const Index = () => {
   useBackgroundColor(GRAY_RANGE[900]);
@@ -44,60 +33,48 @@ export const Index = () => {
   const [harmony, setHarmony] = useState(HarmonyKey.analogous);
 
   return (
-    <>
-      <Content>
-        <Frame>
-          <H1>Color Picker</H1>
-          <ColorPickers>
-            <HexColorPicker
-              color={pickedColor}
-              onChange={setPickedColor}
-              style={{
-                width: "15rem",
-                height: "15rem"
-              }}
-            />
-          </ColorPickers>
-          <SingleValueInput
-            selections={Object.values(HarmonyKey)}
-            currentValue={harmony}
-            setCurrentValue={setHarmony}
-          />
-        </Frame>
-        <Frame>
-          <ColorHarmonyDisplay color={pickedColor} harmony={harmony} />
-          <button
-            onClick={(e) => {
-              const c = Color(pickedColor);
-              const hslColor = c.hsl().array();
-              const harmonies = HARMONIES[harmony](hslColor[0], hslColor[1], hslColor[2]);
-
-              const harmonySelects = harmonies.map((h) => {
-                const c = Color(h);
-                return {
-                  label: c.hex(),
-                  value: c.hex()
-                };
-              });
-
-              setColors([...colors, ...harmonySelects]);
+    <Page maxWidth={maxPageWidth}>
+      <FlexColC gap="1rem">
+        <H1>Color Picker</H1>
+        <ColorPickers>
+          <HexColorPicker
+            color={pickedColor}
+            onChange={setPickedColor}
+            style={{
+              width: "15rem",
+              height: "15rem"
             }}
-          >
-            Use Colors
-          </button>
-        </Frame>
+          />
+        </ColorPickers>
+        <SingleValueInput selections={Object.values(HarmonyKey)} currentValue={harmony} setCurrentValue={setHarmony} />
+        <ColorHarmonyDisplay color={pickedColor} harmony={harmony} />
+        <button
+          onClick={(e) => {
+            const c = Color(pickedColor);
+            const hslColor = c.hsl().array();
+            const harmonies = HARMONIES[harmony](hslColor[0], hslColor[1], hslColor[2]);
+
+            const harmonySelects = harmonies.map((h) => {
+              const c = Color(h);
+              return {
+                label: c.hex(),
+                value: c.hex()
+              };
+            });
+
+            setColors([...colors, ...harmonySelects]);
+          }}
+        >
+          Use Colors
+        </button>
         <HR />
-        <Frame>
-          <H1>Shade Generator</H1>
-          <MultiColorInput placeholder={"Type Hex Colors"} input={colors} setInput={setColors} />
-          {colors && <ShadeResultsDisplay colors={colors.map((c) => c.value)} />}
-        </Frame>
+        <H1>Shade Generator</H1>
+        <MultiColorInput placeholder={"Type Hex Colors"} input={colors} setInput={setColors} />
+        {colors && <ShadeResultsDisplay colors={colors.map((c) => c.value)} />}
         <HR />
-        <Frame>
-          <H1>Export</H1>
-          {colors && <ShadeResultsExport colors={colors.map((c) => c.value)} />}
-        </Frame>
-      </Content>
-    </>
+        <H1>Export</H1>
+        {colors && <ShadeResultsExport colors={colors.map((c) => c.value)} />}
+      </FlexColC>
+    </Page>
   );
 };

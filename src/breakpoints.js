@@ -15,3 +15,8 @@ export const breakpoint = {
   xl: `(min-width: ${size.xl})`,
   xxl: `(min-width: ${size.xxl})`
 };
+
+export function isXS() {
+  var xs = window.matchMedia("(max-width: 576px)").matches;
+  return xs;
+}

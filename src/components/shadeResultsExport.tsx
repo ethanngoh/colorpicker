@@ -1,17 +1,22 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
 import { CopyBlock, monokaiSublime } from "react-code-blocks";
+import { breakpoint } from "../breakpoints";
 
 import { generateColors, GenerateColorsResult } from "../colorAlgo";
 import { SingleValueInput } from "./singleValueInput";
 
 const ResultsContainer = styled.div`
-  min-width: 30rem;
+  // min-width: 30rem;
   gap: 2rem;
   font-size: 1rem;
   height: 30rem;
   overflow-y: auto;
   align-items: center;
+
+  @media ${breakpoint.xs} {
+    width: 100%;
+  }
 `;
 
 export enum SupportedLanguageKey {
