@@ -6,6 +6,7 @@ export const App = () => {
     <HashRouter>
       <Routes>
         <Route index element={<Index />} />
+        <Route path=":config" element={<Index />} />
       </Routes>
     </HashRouter>
   );
