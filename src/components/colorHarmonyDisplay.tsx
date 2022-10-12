@@ -46,7 +46,7 @@ export const ColorHarmonyDisplay = ({ color, harmony }: { color: string; harmony
       <HarmonyDisplay>
         {harmonies.map((harmony) => {
           const c = Color(harmony);
-          return <Result color={c.hex()} />;
+          return <Result key={Object.values(harmony).join(",")} color={c.hex()} />;
         })}
       </HarmonyDisplay>
     </FlexColC>
