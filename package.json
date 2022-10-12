@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/color": "^3.0.3",
     "@types/jest": "^27.5.2",
+    "@types/lodash": "^4.14.186",
     "@types/node": "^16.11.45",
     "@types/react": "^18.0.15",
     "@types/react-animations": "^1.0.0",
@@ -37,7 +38,9 @@
     "eject": "react-scripts eject",
     "lint": "prettier --write .",
     "prepare": "husky install",
-    "spellcheck": "cspell src/**/*.{tsx,ts,html} src/*.{tsx,ts,html}"
+    "spellcheck": "cspell src/**/*.{tsx,ts,html} src/*.{tsx,ts,html}",
+    "typecheck": "tsc --project tsconfig.json  --noemit",
+    "tc": "npm run typecheck"
   },
   "eslintConfig": {
     "extends": [
@@ -59,7 +62,8 @@
   },
   "devDependencies": {
     "@types/react-color": "^3.0.6",
-    "@types/smooth-scroll": "^16.1.1"
+    "@types/smooth-scroll": "^16.1.1",
+    "jest-watch-typeahead": "^0.6.5"
   },
   "homepage": "http://colorpicker.ethangoh.com/"
 }
